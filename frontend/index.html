@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Stokvel App</title>
+</head>
+<body>
+    <h1>Stokvel Members</h1>
+    <div id="members"></div>
+
+    <script>
+        async function loadMembers() {
+            const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwicm9sZSI6ImFkbWluIiwiaWF0IjoxNzcxNjc5MjE5LCJleHAiOjE3NzE3NjU2MTl9.5lYl9aKKYJVvcRKOejnlkljOo2BF5L5lOKZ01E44EKY'; // from login
+            const response = await fetch('http://localhost:5000/api/members', {
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                }
+            });
+            const members = await response.json();
+            const div = document.getElementById('members');
+            div.innerHTML = '<pre>' + JSON.stringify(members, null, 2) + '</pre>';
+        }
+        loadMembers();
+    </script>
+</body>
+</html>
