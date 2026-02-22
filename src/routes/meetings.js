@@ -2,7 +2,7 @@
 const express = require('express');
 const { Meeting, Fine, Transaction, Member, sequelize } = require('../models');
 const { authenticate, authorize } = require('../middleware/auth');
-const LoanService = require('../services/loanService');
+const LoanService = require('../services/loanService.js');
 const router = express.Router();
 
 router.use(authenticate);
