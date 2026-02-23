@@ -9,7 +9,7 @@ const cors = require('cors');
 
 // Allow your GitHub Pages origin explicitly
 const corsOptions = {
-    origin: 'https://github.com/mvpvovo/stokvel-frontend', // Your exact frontend origin (no trailing slash)
+    origin: 'https://mvpvovo.github.io', // Your exact frontend origin (no trailing slash)
     optionsSuccessStatus: 200 // some legacy browsers choke on 204
 };
 
