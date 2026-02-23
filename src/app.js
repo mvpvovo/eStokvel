@@ -5,15 +5,11 @@ const sequelize = require('./config/database');
 
 dotenv.config();
 
-const cors = require('cors');
+const app = express(); // ← missing line
 
-// Allow your GitHub Pages origin explicitly
-const corsOptions = {
-    origin: 'https://mvpvovo.github.io', // Your exact frontend origin (no trailing slash)
-    optionsSuccessStatus: 200 // some legacy browsers choke on 204
-};
-
-app.use(cors(corsOptions));
+// Middleware
+app.use(cors()); // Allow all origins (or configure via env later)
+app.use(express.json()); // ← essential for parsing JSON bodies
 
 // Routes
 app.use('/api/auth', require('./routes/auth'));
@@ -24,8 +20,10 @@ app.use('/api/events', require('./routes/events'));
 app.use('/api/alcohol', require('./routes/alcohol'));
 app.use('/api/reports', require('./routes/reports'));
 
-const PORT = process.env.PORT || 25397;
+const PORT = process.env.PORT || 5000; // Use Render's PORT or fallback to 5000 locally
 
 sequelize.sync({ alter: true }).then(() => {
-  app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+  app.listen(PORT, '0.0.0.0', () => { // Bind to 0.0.0.0 for Render
+    console.log(`Server running on port ${PORT}`);
+  });
 });
