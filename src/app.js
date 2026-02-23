@@ -6,7 +6,10 @@ const sequelize = require('./config/database');
 dotenv.config();
 
 const app = express();
-app.use(cors());
+
+// ✅ CORS – allow only your frontend (replace with your actual live URL)
+app.use(cors({ origin: 'https://mvpvovo.github.io/stokvel-frontend' }));
+
 app.use(express.json());
 
 // Routes
